@@ -84,14 +84,23 @@ function searchByName(people){
   return foundPerson;
 }
 
-function traitSearchHub(people){
-  let input = promptFor("What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\n Please Enter One below!\nOr Restart if you have a name.", autoValid);
+function traitSearchHub(people, list=[]){
+  let promptMessage = "What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\n Please Enter One below!\nOr Restart if you have a name.";
+  let input = promptFor(promptMessage, autoValid);
   input = input.toLowerCase().trim();
+  let result = traitFilter(input, list);
+  
+
+  //Add Function or logic to support multiple returns and minimalism list
+
+}
+
+function traitFilter(input, list) {
   let result;
   switch(input){
 
     case "gender":
-      result = 0 //TODO: searchByGender function
+      result = searchByGender(list); //TODO: searchByGender function
       break;
     case "date of birth":
       result = 0 //TODO: searchByDateOfBirth function
@@ -111,13 +120,36 @@ function traitSearchHub(people){
     default:
       traitSearchHub(people); // If input does not match any of the above, ask again
   }
-
-  //Add Function or logic to support multiple returns and minimalism list
-
+  return result;
 }
 
 //TODO: add other trait filter functions here.
-function searchByEyeColor(people){
+
+function searchByGender(people, list){
+  let userAnswer = promptFor("What Gender do you want to filter by?: ", autoValid)
+  var passedListOfPeople = list;
+  let newList = [];
+  if (passedListOfPeople.length == 0){
+    newList = people.filter(function(person){
+      if(userAnswer == person.gender){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }else if(passedListOfPeople.length > 0){
+    newList = list.filter(function(person){
+      if(userAnswer == person.gender){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+  return newList;
+}
+
+function searchByEyeColor(people, list){
 
 }
 

@@ -15,7 +15,8 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      // TODO: search by traits 
+      searchResults = traitSearchHub(people);
       break;
       default:
     app(people); // restart app
@@ -83,12 +84,42 @@ function searchByName(people){
   return foundPerson;
 }
 
-//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
+function traitSearchHub(people){
+  let input = promptFor("What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\n Please Enter One below!\nOr Restart if you have a name.", autoValid);
+  input = input.toLowerCase().trim();
+  let result;
+  switch(input){
+
+    case "gender":
+      result = 0 //TODO: searchByGender function
+      break;
+    case "date of birth":
+      result = 0 //TODO: searchByDateOfBirth function
+      break;
+    case "height":
+      result = 0 //TODO: searchByHeight Function
+      break;
+    case "weight":
+      result = 0 //TODO: searchByWeight function
+      break;
+    case "eye color":
+      result = 0 //TODD: searchByEyeColor function
+      break;
+    case "occupation":
+      result = 0 //TODO: searchByOccupation function
+      break;
+    default:
+      traitSearchHub(people); // If input does not match any of the above, ask again
+  }
+
+  //Add Function or logic to support multiple returns and minimalism list
 
 }
 
 //TODO: add other trait filter functions here.
+function searchByEyeColor(people){
+
+}
 
 
 

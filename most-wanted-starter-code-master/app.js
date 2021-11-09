@@ -85,22 +85,22 @@ function searchByName(people){
 }
 
 function traitSearchHub(people, list=[]){
-  let promptMessage = "What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\n Please Enter One below!\nOr Restart if you have a name.";
+  let promptMessage = "What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\nPlease Enter One below!\nOr Restart if you have a name.";
   let input = promptFor(promptMessage, autoValid);
   input = input.toLowerCase().trim();
-  let result = traitFilter(input, list);
+  let result = traitFilter(input, people, list);
   
 
   //Add Function or logic to support multiple returns and minimalism list
 
 }
 
-function traitFilter(input, list) {
+function traitFilter(input, people, list) {
   let result;
   switch(input){
 
     case "gender":
-      result = searchByGender(list); //TODO: searchByGender function
+      result = searchByGender(people, list); //TODO: searchByGender function
       break;
     case "date of birth":
       result = 0 //TODO: searchByDateOfBirth function
@@ -112,7 +112,7 @@ function traitFilter(input, list) {
       result = 0 //TODO: searchByWeight function
       break;
     case "eye color":
-      result = 0 //TODD: searchByEyeColor function
+      result = searchByEyeColor(people, list);
       break;
     case "occupation":
       result = 0 //TODO: searchByOccupation function
@@ -127,9 +127,9 @@ function traitFilter(input, list) {
 
 function searchByGender(people, list){
   let userAnswer = promptFor("What Gender do you want to filter by?: ", autoValid)
-  var passedListOfPeople = list;
+  var passedListOfPeople = list.length;
   let newList = [];
-  if (passedListOfPeople.length == 0){
+  if (passedListOfPeople == 0){
     newList = people.filter(function(person){
       if(userAnswer == person.gender){
         return true;
@@ -137,7 +137,7 @@ function searchByGender(people, list){
         return false;
       }
     })
-  }else if(passedListOfPeople.length > 0){
+  }else if(passedListOfPeople > 0){
     newList = list.filter(function(person){
       if(userAnswer == person.gender){
         return true;
@@ -150,7 +150,27 @@ function searchByGender(people, list){
 }
 
 function searchByEyeColor(people, list){
-
+  let userAnswer = promptFor("What Eye Color do you want to filter by?:\nAvailable options:\nPlease Select One: \n Brown,\n Black,\n Hazel,\n Blue,\n Green,\nPlease Type One ", autoValid)
+  var passedListOfPeople = list.length;
+  let newList = [];
+  if (passedListOfPeople == 0){
+    newList = people.filter(function(person){
+      if(userAnswer == person.eyeColor){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }else if(passedListOfPeople > 0){
+    newList = list.filter(function(person){
+      if(userAnswer == person.eyeColor){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+  return newList;
 }
 
 

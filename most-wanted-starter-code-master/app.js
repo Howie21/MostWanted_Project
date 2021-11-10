@@ -103,10 +103,10 @@ function traitFilter(input, people, list) {
       result = searchByGender(people, list); //TODO: searchByGender function
       break;
     case "date of birth":
-      result = 0 //TODO: searchByDateOfBirth function
+      result = searchByDatOfBirth(people, list); //TODO: searchByDateOfBirth function
       break;
     case "height":
-      result = 0 //TODO: searchByHeight Function
+      result = searchByHeight(people, list) //TODO: searchByHeight Function
       break;
     case "weight":
       result = 0 //TODO: searchByWeight function
@@ -174,7 +174,7 @@ function searchByEyeColor(people, list){
 }
 
 function searchByDatOfBirth(people, list){
-  let userAnswer = promptFor("Please Enter the D.O.B that you want to fetch from the data base", autoValid)
+  let userAnswer = promptFor("Please Enter the D.O.B that you want to fetch from the data base:\nWARNING - Format must follow MM/DD/YYYY, With NO '0' before single digit entry ", autoValid)
   var passedListOfPeople = list.length;
   let newList = [];
   if (passedListOfPeople == 0){
@@ -188,6 +188,30 @@ function searchByDatOfBirth(people, list){
   }else if(passedListOfPeople > 0){
     newList = list.filter(function(person){
       if(userAnswer == person.dob){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+  return newList;
+}
+
+function searchByHeight(people, list){
+  let userAnswer = promptFor("Please enter the Height you want to filter by: \nWARNING - Height must be the total inches of someones height.\nEXAMPLE - 6ft 2ins would be inputted as 74. ", autoValid)
+  var passedListOfPeople = list.length;
+  let newList = [];
+  if (passedListOfPeople == 0){
+    newList = people.filter(function(person){
+      if(userAnswer == person.height){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }else if(passedListOfPeople > 0){
+    newList = list.filter(function(person){
+      if(userAnswer == person.height){
         return true;
       }else{
         return false;

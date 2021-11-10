@@ -343,16 +343,15 @@ function displayPersonsFamily(person, people){
 
   if(spouse.length > 0){
     alert(person.firstName + "'s Spouse is: ")
-    displayPerson(spouse);
-    break;
+    displayPerson(spouse[0]);
   } else {
-    break;
+    
   }
 
   if(parentsLength > 1){
     displayPeople(parentsFound);
   }else if(parentsLength == 1){
-    displayPerson(parentsFound);
+    displayPerson(parentsFound[0]);
   }
   
 

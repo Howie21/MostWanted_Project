@@ -173,6 +173,30 @@ function searchByEyeColor(people, list){
   return newList;
 }
 
+function searchByDatOfBirth(people, list){
+  let userAnswer = promptFor("Please Enter the D.O.B that you want to fetch from the data base", autoValid)
+  var passedListOfPeople = list.length;
+  let newList = [];
+  if (passedListOfPeople == 0){
+    newList = people.filter(function(person){
+      if(userAnswer == person.dob){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }else if(passedListOfPeople > 0){
+    newList = list.filter(function(person){
+      if(userAnswer == person.dob){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+  return newList;
+}
+
 
 
 //#endregion

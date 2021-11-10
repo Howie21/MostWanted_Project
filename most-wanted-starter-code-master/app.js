@@ -50,7 +50,7 @@ function mainMenu(person, people){
       mainMenu(person, people);
     break;
     case "descendants":
-    // TODO: get person's descendants
+      displayPersonsDescendent(person, people);// TODO: get person's descendants
     break;
     case "restart":
     app(people); // restart
@@ -349,6 +349,7 @@ function displayPersonsFamily(person, people){
   }
 
   if(parentsLength > 1){
+    alert(person.firstName + "'s Parents are: ");
     displayPeople(parentsFound);
   }else if(parentsLength == 1){
     displayPerson(parentsFound[0]);
@@ -356,6 +357,31 @@ function displayPersonsFamily(person, people){
   
 
   return parentsFound;
+
+}
+
+function displayPersonsDescendent(person, people){
+  let descendentFound = [];
+  let parent = person;
+  descendentFound = people.filter(function(person){
+    if( person.parents.includes(parent.id)){
+      return true;
+    } else {
+      return false;
+    }
+  })
+
+  if(descendentFound.length > 0){
+    if(descendentFound.length == 1){
+      alert(person.firstName + " has one descendent, here's there information:");
+      displayPerson(descendentFound[0]);
+    } else {
+      alert(person.firstName + "has multiple descendants, producing their info...");
+      displayPeople(descendentFound);
+    }
+  } else {
+    return;
+  }
 
 }
 

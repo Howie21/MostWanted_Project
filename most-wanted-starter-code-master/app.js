@@ -43,9 +43,11 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       displayPerson(person);  // TODO: get person's info
+      mainMenu(person, people);
     break;
     case "family":
-      displayPersonParents(person, people)// TODO: get person's family
+      displayPersonsFamily(person, people)// TODO: get person's family
+      mainMenu(person, people);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -316,10 +318,18 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function displayPersonParents(person, people){
+function displayPersonsFamily(person, people){
   let parentsList = person.parents;
   let parentsLength = person.parents.length;
   let parentsFound = [];
+  let spouseID = person.currentSpouse;
+  let spouse = people.filter(function(person){
+    if(person.id == spouseID){
+      return true;
+    } else {
+      return false;
+    }
+  })
 
   for(var i = 0; i < parentsLength; i++){
     parentsFound = people.filter(function(person){
@@ -331,6 +341,14 @@ function displayPersonParents(person, people){
     })
   }
 
+  if(spouse.length > 0){
+    alert(person.firstName + "'s Spouse is: ")
+    displayPerson(spouse);
+    break;
+  } else {
+    break;
+  }
+
   if(parentsLength > 1){
     displayPeople(parentsFound);
   }else if(parentsLength == 1){
@@ -338,7 +356,7 @@ function displayPersonParents(person, people){
   }
   
 
-  return;
+  return parentsFound;
 
 }
 

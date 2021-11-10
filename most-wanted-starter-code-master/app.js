@@ -106,7 +106,7 @@ function traitFilter(input, people, list) {
       result = searchByDatOfBirth(people, list); //TODO: searchByDateOfBirth function
       break;
     case "height":
-      result = searchByHeight(people, list) //TODO: searchByHeight Function
+      result = searchByHeight(people, list); //TODO: searchByHeight Function
       break;
     case "weight":
       result = searchByWeight(people, list); //TODO: searchByWeight function
@@ -115,7 +115,7 @@ function traitFilter(input, people, list) {
       result = searchByEyeColor(people, list);
       break;
     case "occupation":
-      result = 0 //TODO: searchByOccupation function
+      result = searchByOccupation(people, list); //TODO: searchByOccupation function
       break;
     default:
       traitSearchHub(people); // If input does not match any of the above, ask again
@@ -245,7 +245,29 @@ function searchByWeight(people, list){
   return newList;
 }
 
-
+function searchByOccupation(people, list){
+  let userAnswer = promptFor("Please enter the occupation you wish to filter with:\n ", autoValid)
+  var passedListOfPeople = list.length;
+  let newList = [];
+  if (passedListOfPeople == 0){
+    newList = people.filter(function(person){
+      if(userAnswer == person.occupation){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }else if(passedListOfPeople > 0){
+    newList = list.filter(function(person){
+      if(userAnswer == person.occupation){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+  return newList;
+}
 
 //#endregion
 

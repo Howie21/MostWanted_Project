@@ -44,21 +44,22 @@ function mainMenu(person, people){
     case "info":
       displayPerson(person);  // TODO: get person's info
       mainMenu(person, people);
-    break;
+      break;
     case "family":
       displayPersonsFamily(person, people)// TODO: get person's family
       mainMenu(person, people);
-    break;
+      break;
     case "descendants":
       displayPersonsDescendent(person, people);// TODO: get person's descendants
-    break;
+      mainMenu(person, people);
+      break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -371,6 +372,11 @@ function displayPersonsDescendent(person, people){
     }
   })
 
+  let desDes = findDescendentOfDescendants(descendentFound, people);
+  for (var i = 0; i < desDes.length; i++){
+    descendentFound.push(desDes[i])
+  }
+
   if(descendentFound.length > 0){
     if(descendentFound.length == 1){
       alert(person.firstName + " has one descendent, here's there information:");
@@ -382,7 +388,25 @@ function displayPersonsDescendent(person, people){
   } else {
     return;
   }
+  return descendentFound;
+}
 
+function findDescendentOfDescendants(list, people){
+  let newList = [];
+  
+  for(var i = 0; i < list.length; i++){
+    var foundDes = people.filter(function(person){
+      if(person.parents.includes(list[i].id)){
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if(foundDes.length > 0){
+      newList.push(foundDes[0]);
+    }
+  }
+  return newList;
 }
 
 

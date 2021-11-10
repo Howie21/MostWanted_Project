@@ -109,7 +109,7 @@ function traitFilter(input, people, list) {
       result = searchByHeight(people, list) //TODO: searchByHeight Function
       break;
     case "weight":
-      result = 0 //TODO: searchByWeight function
+      result = searchByWeight(people, list); //TODO: searchByWeight function
       break;
     case "eye color":
       result = searchByEyeColor(people, list);
@@ -212,6 +212,30 @@ function searchByHeight(people, list){
   }else if(passedListOfPeople > 0){
     newList = list.filter(function(person){
       if(userAnswer == person.height){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+  return newList;
+}
+
+function searchByWeight(people, list){
+  let userAnswer = promptFor("Please enter the weight you wish to filter by: \nEXAMPLE -  174lbs will be entered as just 174. ", autoValid)
+  var passedListOfPeople = list.length;
+  let newList = [];
+  if (passedListOfPeople == 0){
+    newList = people.filter(function(person){
+      if(userAnswer == person.weight){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }else if(passedListOfPeople > 0){
+    newList = list.filter(function(person){
+      if(userAnswer == person.weight){
         return true;
       }else{
         return false;

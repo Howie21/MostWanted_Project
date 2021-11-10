@@ -88,10 +88,28 @@ function traitSearchHub(people, list=[]){
   let promptMessage = "What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\nPlease Enter One below!\nOr Restart if you have a name.";
   let input = promptFor(promptMessage, autoValid);
   input = input.toLowerCase().trim();
-  let result = traitFilter(input, people, list);
-  
+  var result = traitFilter(input, people, list);
 
-  //Add Function or logic to support multiple returns and minimalism list
+  alert("Press okay too see the result of your request.");
+  displayPeople(result);
+  let userResponse = promptFor('Would you like to continue filtering? \nIf there are more then one person listed, please enter Yes, if there is only one please enter No:', yesNo).toLowerCase();
+  switch(userResponse){
+    case "yes":
+      result = traitSearchHub(people, list);
+      break;
+    case "no":
+      break;
+    default:
+      break;
+  }
+
+  if(result.length == 1){
+    alert("You've filtered to one result, pushing you to Main Menu");
+    mainMenu(result[0], people);
+  }else if(result.length > 1){
+    alert("Your Filter Results contains more then one person, we highly recommend you filter more, redirecting now.... ")
+    result = traitSearchHub(people, list);
+  }
 
 }
 

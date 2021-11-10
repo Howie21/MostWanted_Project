@@ -42,10 +42,10 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      displayPerson(person);  // TODO: get person's info
     break;
     case "family":
-    // TODO: get person's family
+      displayPersonParents(person, people)// TODO: get person's family
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -81,7 +81,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return foundPerson[0];
 }
 
 function traitSearchHub(people, list=[]){
@@ -95,7 +95,7 @@ function traitSearchHub(people, list=[]){
   let userResponse = promptFor('Would you like to continue filtering? \nIf there are more then one person listed, please enter Yes, if there is only one please enter No:', yesNo).toLowerCase();
   switch(userResponse){
     case "yes":
-      result = traitSearchHub(people, list);
+      result = traitSearchHub(people, result);
       break;
     case "no":
       break;
@@ -104,11 +104,11 @@ function traitSearchHub(people, list=[]){
   }
 
   if(result.length == 1){
-    alert("You've filtered to one result, pushing you to Main Menu");
+    alert("You've filtered to one result, pushing you to info selection menu! Great Job Agent!");
     mainMenu(result[0], people);
   }else if(result.length > 1){
     alert("Your Filter Results contains more then one person, we highly recommend you filter more, redirecting now.... ")
-    result = traitSearchHub(people, list);
+    result = traitSearchHub(people, result);
   }
 
 }
@@ -315,6 +315,33 @@ function displayPerson(person){
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
+
+function displayPersonParents(person, people){
+  let parentsList = person.parents;
+  let parentsLength = person.parents.length;
+  let parentsFound = [];
+
+  for(var i = 0; i < parentsLength; i++){
+    parentsFound = people.filter(function(person){
+      if(person.id == parentsList[i]){
+        return true;
+      }else{
+        return false;
+      }
+    })
+  }
+
+  if(parentsLength > 1){
+    displayPeople(parentsFound);
+  }else if(parentsLength == 1){
+    displayPerson(parentsFound);
+  }
+  
+
+  return;
+
+}
+
 
 //#endregion
 

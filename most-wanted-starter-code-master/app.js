@@ -147,7 +147,7 @@ function traitFilter(input, people, list) {
 //TODO: add other trait filter functions here.
 
 function searchByGender(people, list){
-  let userAnswer = promptFor("What Gender do you want to filter by?: ", autoValid)
+  let userAnswer = promptFor("What Gender do you want to filter by?: ", genderResponse)
   var passedListOfPeople = list.length;
   let newList = [];
   if (passedListOfPeople == 0){
@@ -402,9 +402,9 @@ function findDescendentOfDescendants(list, people){
         return false;
       }
     });
-    if(foundDes.length > 0){
-      newList.push(foundDes[0]);
-    }
+  }
+  for(var i = 0; i < foundDes.length; i++){
+    newList.push(foundDes[i]);
   }
   return newList;
 }
@@ -435,6 +435,15 @@ function promptFor(question, valid){
 // helper function/callback to pass into promptFor to validate yes/no answers.
 function yesNo(input){
   if(input.toLowerCase() == "yes" || input.toLowerCase() == "no"){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function genderResponse(input){
+  if(input.toLowerCase() == "male" || input.toLowerCase() == "delete"){
     return true;
   }
   else{

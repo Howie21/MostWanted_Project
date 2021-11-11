@@ -72,8 +72,8 @@ function mainMenu(person, people){
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", validateStringInput);
+  let lastName = promptFor("What is the person's last name?", validateStringInput);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -89,7 +89,7 @@ function searchByName(people){
 
 function traitSearchHub(people, list=[]){
   let promptMessage = "What trait would you like to filter the database by?: \nAvailable trait Filter methods: \nGender:\nDate of Birth\nHeight\nWeight\nEye Color\nOccupation\nPlease Enter One below!\nOr Restart if you have a name.";
-  let input = promptFor(promptMessage, autoValid);
+  let input = promptFor(promptMessage, validateStringInput);
   input = input.toLowerCase().trim();
   var result = traitFilter(input, people, list);
 
@@ -267,7 +267,7 @@ function searchByWeight(people, list){
 }
 
 function searchByOccupation(people, list){
-  let userAnswer = promptFor("Please enter the occupation you wish to filter with:\n ", autoValid)
+  let userAnswer = promptFor("Please enter the occupation you wish to filter with:\n ", validateStringInput)
   var passedListOfPeople = list.length;
   let newList = [];
   if (passedListOfPeople == 0){
@@ -464,6 +464,14 @@ function validateNumber(input){
   var number = parseInt(input);
   var typeCheck = typeof number;
   if(typeCheck == true){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function validateStringInput(input){
+  if(input.match(/[a-z]/i)){
     return true;
   } else {
     return false;

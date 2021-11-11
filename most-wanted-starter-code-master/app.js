@@ -171,7 +171,7 @@ function searchByGender(people, list){
 }
 
 function searchByEyeColor(people, list){
-  let userAnswer = promptFor("What Eye Color do you want to filter by?:\nAvailable options:\nPlease Select One: \n Brown,\n Black,\n Hazel,\n Blue,\n Green,\nPlease Type One ", autoValid)
+  let userAnswer = promptFor("What Eye Color do you want to filter by?:\nAvailable options:\nPlease Select One: \n Brown,\n Black,\n Hazel,\n Blue,\n Green,\nPlease Type One ", validateEyeColor)
   var passedListOfPeople = list.length;
   let newList = [];
   if (passedListOfPeople == 0){
@@ -219,7 +219,7 @@ function searchByDatOfBirth(people, list){
 }
 
 function searchByHeight(people, list){
-  let userAnswer = promptFor("Please enter the Height you want to filter by: \nWARNING - Height must be the total inches of someones height.\nEXAMPLE - 6ft 2ins would be inputted as 74. ", autoValid)
+  let userAnswer = promptFor("Please enter the Height you want to filter by: \nWARNING - Height must be the total inches of someones height.\nEXAMPLE - 6ft 2ins would be inputted as 74. ", validateNumber)
   var passedListOfPeople = list.length;
   let newList = [];
   if (passedListOfPeople == 0){
@@ -243,7 +243,7 @@ function searchByHeight(people, list){
 }
 
 function searchByWeight(people, list){
-  let userAnswer = promptFor("Please enter the weight you wish to filter by: \nEXAMPLE -  174lbs will be entered as just 174. ", autoValid)
+  let userAnswer = promptFor("Please enter the weight you wish to filter by: \nEXAMPLE -  174lbs will be entered as just 174. ", validateNumber)
   var passedListOfPeople = list.length;
   let newList = [];
   if (passedListOfPeople == 0){
@@ -443,10 +443,29 @@ function yesNo(input){
 }
 
 function genderResponse(input){
-  if(input.toLowerCase() == "male" || input.toLowerCase() == "delete"){
+  if(input.toLowerCase() == "male" || input.toLowerCase() == "female"){
     return true;
   }
   else{
+    return false;
+  }
+}
+
+function validateEyeColor(input){
+  var eyeColors = ["black", "brown", "hazel", "blue", "green"];
+  if(eyeColors.includes(input.toLowerCase())){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function validateNumber(input){
+  var number = parseInt(input);
+  var typeCheck = typeof number;
+  if(typeCheck == true){
+    return true;
+  } else {
     return false;
   }
 }
